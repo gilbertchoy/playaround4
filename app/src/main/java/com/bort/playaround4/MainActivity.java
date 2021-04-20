@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         arr[6]=1;
         arr[7]=10;
         arr[8]=4;
-        mergeSort(arr,0,arr.length);
+        //mergeSort(arr,0,arr.length);
         printValues(arr);
 
         arr[0]=8;
@@ -35,9 +35,25 @@ public class MainActivity extends AppCompatActivity {
         arr[6]=1;
         arr[7]=10;
         arr[8]=4;
-        quickSort(arr,0, arr.length);
+        //quickSort(arr,0, arr.length);
         Log.d("berttest","quicksort");
         printValues(arr);
+
+        arr  = new int[9];
+        arr[0]=8;
+        arr[1]=5;
+        arr[2]=6;
+        arr[3]=2;
+        arr[4]=3;
+        arr[5]=9;
+        arr[6]=1;
+        arr[7]=10;
+        arr[8]=4;
+        mergeSort1(arr,0,arr.length);
+        Log.d("berttest","mergeSort1");
+        printValues(arr);
+
+
     }
 
     public void quickSort(int[] a, int l, int r){
@@ -117,6 +133,80 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+
+    public static void mergeSort1(int[] a, int l, int r){
+        int m = (r-l)/2;
+        mergeSort1(a,l,m);
+        mergeSort1(a,m+1,r);
+        merge1(a,l,m,r);
+    }
+
+    public static void merge1(int[] a, int l, int m, int r){
+        //create arrays
+        int[] left = new int[m-l];
+        int[] right = new int[r-m+1];
+
+        for(int i=0; i<left.length; i++){
+            left[i] = a[l+i];
+        }
+        for(int i=0; i<right.length; i++){
+            right[i] = a[m+i];
+        }
+
+        int rc = 0;
+        int lc = 0;
+        int index = 0;
+        //merge
+        while(lc < left.length && rc < right.length){
+            if(right[rc]<left[lc]){
+                a[index] = right[rc];
+                rc++;
+                index++;
+            }
+            else{
+                a[index] = left[lc];
+                lc++;
+                index++;
+            }
+        }
+        while(lc < left.length){
+            a[index] = a[lc];
+            lc++;
+            index++;
+        }
+        while(rc < right.length){
+            a[index] = a[rc];
+            rc++;
+            index++;
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void printValues(int a[]){
         for(int i=0; i<a.length; i++){
